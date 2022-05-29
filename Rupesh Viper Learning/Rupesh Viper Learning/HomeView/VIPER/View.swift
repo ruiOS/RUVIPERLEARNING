@@ -10,18 +10,22 @@ import UIKit
 ///Home View Controller of the app
 final class HomeViewController: UIViewController, HomePresenterToViewProtocol {
 
-    private let fetchButton: HighlitingButton = {
-        let tempButton = HighlitingButton()
+    //MARK: - Delegates
+    var presenter: PresenterProtocol?
+
+    //MARK: - Views
+    ///activity view used to handle activity in the view controller
+    private var activityView: UIActivityIndicatorView?
+
+    ///fetch button to fetch data
+    private let fetchButton: HighLightEnabledButton = {
+        let tempButton = HighLightEnabledButton()
         tempButton.translatesAutoresizingMaskIntoConstraints = false
         tempButton.setTitle("Fetch", for: [])
         tempButton.backgroundColor = .white
         tempButton.setTitleColor(.black, for: [])
         return tempButton
     }()
-
-    var activityView: UIActivityIndicatorView?
-
-    var presenter: PresenterProtocol?
 
     //MARK: - View Lifecycle
     override func viewDidLoad() {
@@ -31,18 +35,18 @@ final class HomeViewController: UIViewController, HomePresenterToViewProtocol {
         setFetchButton()
     }
 
-    //MARK: - Set Views
-
+    //MARK: - Fetch Button
+    
+    /// method sets fetch button and its properties
     private func setFetchButton(){
+        //set target
         fetchButton.addTarget(self, action: #selector(fetchDataButtonPressed), for: .touchUpInside)
 
+        // add to view
         self.view.addSubview(fetchButton)
 
         let height: CGFloat = max(self.view.frame.height, self.view.frame.width) * 0.05
         let width: CGFloat = min(self.view.frame.height, self.view.frame.width) * 0.4
-        fetchButton.layer.cornerRadius = 7
-        fetchButton.layer.borderColor = UIColor.gray.cgColor
-        fetchButton.layer.borderWidth = 1
 
         NSLayoutConstraint.activate([
             fetchButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
@@ -50,9 +54,15 @@ final class HomeViewController: UIViewController, HomePresenterToViewProtocol {
             fetchButton.widthAnchor.constraint(equalToConstant: width),
             fetchButton.heightAnchor.constraint(equalToConstant:height)
         ])
+
+        //set corner radius
+        fetchButton.layer.cornerRadius = 7
+        fetchButton.layer.borderColor = UIColor.gray.cgColor
+        fetchButton.layer.borderWidth = 1
     }
 
-
+    
+    /// Method called when fetch data button is pressed
     @objc private func fetchDataButtonPressed(){
         presenter?.fetchDataButtonPressed()
     }
@@ -68,13 +78,16 @@ final class HomeViewController: UIViewController, HomePresenterToViewProtocol {
 
     func showActivity() {
         DispatchQueue.main.async { [weak self] in
+            // check self and intialise activity view
             guard let weakSelf = self else {return}
             weakSelf.activityView = UIActivityIndicatorView(style: .whiteLarge)
             guard let activityView = weakSelf.activityView else {return}
 
+            // remove main view interaction to prevent multiple data fetches
             weakSelf.view.isUserInteractionEnabled = false
             weakSelf.view.alpha = 0.7
-            
+
+            //add activity view to main view
             activityView.translatesAutoresizingMaskIntoConstraints = false
 
             weakSelf.view.addSubview(activityView)
@@ -84,28 +97,25 @@ final class HomeViewController: UIViewController, HomePresenterToViewProtocol {
                 activityView.topAnchor.constraint(equalTo: weakSelf.fetchButton.bottomAnchor, constant: 20)
             ])
 
+            //animate activity view
             activityView.startAnimating()
         }
     }
 
     func dismissActivity() {
         DispatchQueue.main.async { [weak self] in
+            // check self activity view
             guard let weakSelf = self,
                   let activityView = weakSelf.activityView else { return }
+            //stop activity view and deinitialise
             activityView.stopAnimating()
             activityView.removeFromSuperview()
             weakSelf.activityView = nil
+
+            // start main view interaction
             weakSelf.view.isUserInteractionEnabled = true
             weakSelf.view.alpha = 1
         }
     }
 
-}
-
-final class HighlitingButton: UIButton{
-    override var isHighlighted: Bool{
-        didSet{
-            alpha = isHighlighted ? 0.8: 1
-        }
-    }
 }
