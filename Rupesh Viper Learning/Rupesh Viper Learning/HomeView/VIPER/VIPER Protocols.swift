@@ -27,7 +27,7 @@ protocol HomePresenterToViewProtocol: AnyObject{
 //MARK: - Interactor
 
 protocol InteractorDependecyInjectionProtocol: AnyObject{
-    var stringFetcher: ResultStringFetcherProtocol {get set}
+    var alertTitleFetcher: AlertStringFetcherProtocol {get set}
 }
 
 ///Protocol for Interactor
@@ -38,7 +38,6 @@ protocol HomePresenterToInteractorProtocol: AnyObject{
     ///method is used to fetch alert string
     func fetchAlertString()
 }
-
 
 //MARK: - Presenter
 

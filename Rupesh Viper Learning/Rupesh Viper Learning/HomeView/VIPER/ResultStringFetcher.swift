@@ -2,20 +2,20 @@
 //  ResultStringFetcher.swift
 //  Rupesh Viper Learning
 //
-//  Created by Rupeshkumar on 30/05/22.
+//  Created by Rupeshkumar on 29/05/22.
 //
 
 import Foundation
 
-protocol ResultStringFetcherProtocol{
+protocol AlertStringFetcherProtocol{
     func fetchAlertString(completionBlock: @escaping ((String) -> Void))
 }
 
-struct ResultStringFetcher: ResultStringFetcherProtocol{
+struct AlertStringFetcher: AlertStringFetcherProtocol{
 
     func fetchAlertString(completionBlock: @escaping ((String) -> Void)){
         DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 2) {
-            completionBlock("Data Has Been Fetched Successfully")
+            completionBlock("Data has been fetched successfully..!")
         }
     }
 

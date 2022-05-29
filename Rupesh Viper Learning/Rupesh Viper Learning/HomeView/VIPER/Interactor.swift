@@ -10,16 +10,16 @@ import Foundation
 ///Interactor for HomeView
 final class HomeInteractor: HomePresenterToInteractorProtocol, InteractorDependecyInjectionProtocol{
 
-    var stringFetcher: ResultStringFetcherProtocol
+    var alertTitleFetcher: AlertStringFetcherProtocol
 
     weak var presenter: HomeInteractorToPresenterProtocol?
 
-    init(stringFetcher: ResultStringFetcherProtocol){
-        self.stringFetcher = stringFetcher
+    init(alertTitleFetcher: AlertStringFetcherProtocol){
+        self.alertTitleFetcher = alertTitleFetcher
     }
 
     func fetchAlertString(){
-        stringFetcher.fetchAlertString { [weak self] alertData in
+        alertTitleFetcher.fetchAlertString { [weak self] alertData in
             self?.presenter?.interactorDidFetch(data: HomeViewData(alertTitle: alertData))
         }
     }

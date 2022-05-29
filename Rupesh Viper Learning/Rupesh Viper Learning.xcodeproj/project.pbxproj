@@ -148,12 +148,12 @@
 			isa = PBXGroup;
 			children = (
 				E8AF727D2843F22400C7DFE6 /* VIPER Protocols.swift */,
-				E8AF727F284418B200C7DFE6 /* ResultStringFetcher.swift */,
 				E8AF727B2843F0A000C7DFE6 /* View.swift */,
 				E8AF72792843F07500C7DFE6 /* Interactor.swift */,
 				E8AF72772843EFB900C7DFE6 /* Presenter.swift */,
 				E8AF72742843EF3200C7DFE6 /* Entity.swift */,
 				E8AF72722843EEE000C7DFE6 /* Router.swift */,
+				E8AF727F284418B200C7DFE6 /* ResultStringFetcher.swift */,
 			);
 			path = VIPER;
 			sourceTree = "<group>";

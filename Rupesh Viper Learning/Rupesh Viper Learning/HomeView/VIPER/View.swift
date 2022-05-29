@@ -19,6 +19,8 @@ final class HomeViewController: UIViewController, HomePresenterToViewProtocol {
         return tempButton
     }()
 
+    var activityView: UIActivityIndicatorView?
+
     var presenter: PresenterProtocol?
 
     //MARK: - View Lifecycle
@@ -50,6 +52,7 @@ final class HomeViewController: UIViewController, HomePresenterToViewProtocol {
         ])
     }
 
+
     @objc private func fetchDataButtonPressed(){
         presenter?.fetchDataButtonPressed()
     }
@@ -64,11 +67,37 @@ final class HomeViewController: UIViewController, HomePresenterToViewProtocol {
     }
 
     func showActivity() {
-        
+        DispatchQueue.main.async { [weak self] in
+            guard let weakSelf = self else {return}
+            weakSelf.activityView = UIActivityIndicatorView(style: .whiteLarge)
+            guard let activityView = weakSelf.activityView else {return}
+
+            weakSelf.view.isUserInteractionEnabled = false
+            weakSelf.view.alpha = 0.7
+            
+            activityView.translatesAutoresizingMaskIntoConstraints = false
+
+            weakSelf.view.addSubview(activityView)
+
+            NSLayoutConstraint.activate([
+                activityView.centerXAnchor.constraint(equalTo: weakSelf.view.centerXAnchor),
+                activityView.topAnchor.constraint(equalTo: weakSelf.fetchButton.bottomAnchor, constant: 20)
+            ])
+
+            activityView.startAnimating()
+        }
     }
 
     func dismissActivity() {
-        
+        DispatchQueue.main.async { [weak self] in
+            guard let weakSelf = self,
+                  let activityView = weakSelf.activityView else { return }
+            activityView.stopAnimating()
+            activityView.removeFromSuperview()
+            weakSelf.activityView = nil
+            weakSelf.view.isUserInteractionEnabled = true
+            weakSelf.view.alpha = 1
+        }
     }
 
 }

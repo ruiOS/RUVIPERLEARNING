@@ -17,10 +17,12 @@ final class HomePresenter: PresenterProtocol{
     weak var view: HomePresenterToViewProtocol?
 
     func interactorDidFetch(data: HomeViewDataProtocol) {
+        view?.dismissActivity()
         view?.showAlert(withText: data.alertTitle)
     }
 
     func fetchDataButtonPressed(){
+        view?.showActivity()
         interacor?.fetchAlertString()
     }
 

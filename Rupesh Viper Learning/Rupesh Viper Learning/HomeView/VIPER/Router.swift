@@ -17,7 +17,7 @@ class HomeRouter: HomePresenterToRouterProtocol{
 
         let view: HomePresenterToViewProtocol = HomeViewController()
         let presenter: PresenterProtocol = HomePresenter()
-        let interacor: HomePresenterToInteractorProtocol = HomeInteractor(stringFetcher: ResultStringFetcher())
+        let interacor: HomePresenterToInteractorProtocol = HomeInteractor(alertTitleFetcher: AlertStringFetcher())
 
         router.entry = view as? HomeEntryPoint
 
