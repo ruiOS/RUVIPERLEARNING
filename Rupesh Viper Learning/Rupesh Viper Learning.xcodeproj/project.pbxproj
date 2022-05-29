@@ -20,6 +20,7 @@
 		E8AF727A2843F07500C7DFE6 /* Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AF72792843F07500C7DFE6 /* Interactor.swift */; };
 		E8AF727C2843F0A000C7DFE6 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AF727B2843F0A000C7DFE6 /* View.swift */; };
 		E8AF727E2843F22400C7DFE6 /* VIPER Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AF727D2843F22400C7DFE6 /* VIPER Protocols.swift */; };
+		E8AF7280284418B200C7DFE6 /* ResultStringFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AF727F284418B200C7DFE6 /* ResultStringFetcher.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		E8AF72792843F07500C7DFE6 /* Interactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interactor.swift; sourceTree = "<group>"; };
 		E8AF727B2843F0A000C7DFE6 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		E8AF727D2843F22400C7DFE6 /* VIPER Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VIPER Protocols.swift"; sourceTree = "<group>"; };
+		E8AF727F284418B200C7DFE6 /* ResultStringFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultStringFetcher.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				E8AF727D2843F22400C7DFE6 /* VIPER Protocols.swift */,
+				E8AF727F284418B200C7DFE6 /* ResultStringFetcher.swift */,
 				E8AF727B2843F0A000C7DFE6 /* View.swift */,
 				E8AF72792843F07500C7DFE6 /* Interactor.swift */,
 				E8AF72772843EFB900C7DFE6 /* Presenter.swift */,
@@ -293,6 +296,7 @@
 				E8AF727A2843F07500C7DFE6 /* Interactor.swift in Sources */,
 				E8AF72732843EEE000C7DFE6 /* Router.swift in Sources */,
 				E8AF727E2843F22400C7DFE6 /* VIPER Protocols.swift in Sources */,
+				E8AF7280284418B200C7DFE6 /* ResultStringFetcher.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

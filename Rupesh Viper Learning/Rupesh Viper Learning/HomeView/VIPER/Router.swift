@@ -7,17 +7,17 @@
 
 import Foundation
 
-class HomeRouter: HomeRouterProtocol{
+class HomeRouter: HomePresenterToRouterProtocol{
 
     var entry: HomeEntryPoint?
 
-    static func start() -> HomeRouterProtocol {
+    static func start() -> HomePresenterToRouterProtocol {
 
         let router = HomeRouter()
 
-        let view: HomeViewProtocol = HomeViewController()
-        let presenter: HomePresenterProtocol = HomePresenter()
-        let interacor: HomeInteractorProtocol = HomeInteractor()
+        let view: HomePresenterToViewProtocol = HomeViewController()
+        let presenter: PresenterProtocol = HomePresenter()
+        let interacor: HomePresenterToInteractorProtocol = HomeInteractor(stringFetcher: ResultStringFetcher())
 
         router.entry = view as? HomeEntryPoint
 

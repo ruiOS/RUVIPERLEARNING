@@ -10,21 +10,30 @@ import UIKit
 //MARK: - View
 
 ///Protocol for HomeView
-protocol HomeViewProtocol: AnyObject{
+protocol HomePresenterToViewProtocol: AnyObject{
     ///Reference for Presenter of HomeView
-    var presenter: HomePresenterProtocol? { get set }
+    var presenter: PresenterProtocol? { get set }
 
     /// method to showAlert in HomeView
     /// - Parameter text: text to be shown in alert
-    func showAlert(withText text: String)
+    func showAlert(withText text: String?)
+
+    func showActivity()
+
+    func dismissActivity()
+
 }
 
 //MARK: - Interactor
 
+protocol InteractorDependecyInjectionProtocol: AnyObject{
+    var stringFetcher: ResultStringFetcherProtocol {get set}
+}
+
 ///Protocol for Interactor
-protocol HomeInteractorProtocol: AnyObject{
+protocol HomePresenterToInteractorProtocol: AnyObject{
     ///Reference for Presenter of HomeView
-    var presenter: HomePresenterProtocol? {get set}
+    var presenter: HomeInteractorToPresenterProtocol? {get set}
 
     ///method is used to fetch alert string
     func fetchAlertString()
@@ -34,17 +43,26 @@ protocol HomeInteractorProtocol: AnyObject{
 //MARK: - Presenter
 
 ///Protocol for Presenter
-protocol HomePresenterProtocol: AnyObject{
-    
-    ///Reference for router of HomeView
-    var router: HomeRouterProtocol? {get set}
-    ///Reference for interacor of HomeView
-    var interacor: HomeInteractorProtocol? {get set}
-    ///Reference for HomeViewProtocol
-    var view: HomeViewProtocol? {get set}
+protocol HomeViewToPresenterProtocol: AnyObject{
 
-    func interactorDidFetchData(_ data: Result<HomeViewDataProtocol, Error>)
+    ///Reference for router of HomeView
+    var router: HomePresenterToRouterProtocol? {get set}
+    ///Reference for HomeViewProtocol
+    var view: HomePresenterToViewProtocol? {get set}
+    ///Reference for interacor of HomeView
+    var interacor: HomePresenterToInteractorProtocol? {get set}
+
+    func fetchDataButtonPressed()
+
 }
+
+protocol HomeInteractorToPresenterProtocol: AnyObject{
+
+    func interactorDidFetch(data: HomeViewDataProtocol)
+
+}
+
+typealias PresenterProtocol = HomeViewToPresenterProtocol & HomeInteractorToPresenterProtocol
 
 //MARK: - Entity
 
@@ -56,11 +74,11 @@ protocol HomeViewDataProtocol{
 
 //MARK: - Router
 
-typealias HomeEntryPoint = HomeViewProtocol & UIViewController
+typealias HomeEntryPoint = HomePresenterToViewProtocol & UIViewController
 ///Protocol for router
-protocol HomeRouterProtocol: AnyObject{
+protocol HomePresenterToRouterProtocol: AnyObject{
     ///EntryPoint for the app
     var entry: HomeEntryPoint? { get set }
     ///method used to get router
-    static func start() -> HomeRouterProtocol
+    static func start() -> HomePresenterToRouterProtocol
 }

@@ -8,15 +8,20 @@
 import Foundation
 
 ///Presenter for HomeView
-final class HomePresenter: HomePresenterProtocol{
+final class HomePresenter: PresenterProtocol{
 
-    var router: HomeRouterProtocol?
+    var router: HomePresenterToRouterProtocol?
 
-    var interacor: HomeInteractorProtocol?
+    var interacor: HomePresenterToInteractorProtocol?
 
-    var view: HomeViewProtocol?
+    weak var view: HomePresenterToViewProtocol?
 
-    func interactorDidFetchData(_ data: Result<HomeViewDataProtocol, Error>) {
+    func interactorDidFetch(data: HomeViewDataProtocol) {
+        view?.showAlert(withText: data.alertTitle)
+    }
+
+    func fetchDataButtonPressed(){
+        interacor?.fetchAlertString()
     }
 
 }
