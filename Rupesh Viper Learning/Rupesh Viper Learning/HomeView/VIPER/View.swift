@@ -67,7 +67,7 @@ final class HomeViewController: UIViewController, HomePresenterToViewProtocol {
         presenter?.fetchDataButtonPressed()
     }
 
-    //MARK: - ViewProtocol
+    //MARK: - HomePresenterToViewProtocol
     func showAlert(withText text: String?) {
         DispatchQueue.main.async { [weak self] in
             let alert = UIAlertController(title: nil, message: text, preferredStyle: .alert)

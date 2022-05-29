@@ -16,6 +16,7 @@ protocol HomeViewToPresenterProtocol: AnyObject{
     ///Reference for router of HomeView
     var router: HomePresenterToRouterProtocol? {get set}
     ///Reference for HomeViewProtocol
+    ///  - Note: Always set view to weak to avoid retain cycle. Since view already have reference of presenter, this pattern should be followed
     var view: HomePresenterToViewProtocol? {get set}
     ///Reference for interacor of HomeView
     var interacor: HomePresenterToInteractorProtocol? {get set}

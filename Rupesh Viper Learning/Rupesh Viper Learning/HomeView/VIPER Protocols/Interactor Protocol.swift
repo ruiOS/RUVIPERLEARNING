@@ -10,6 +10,7 @@ import Foundation
 ///Protocol used to reference  interactor from Presenter
 protocol HomePresenterToInteractorProtocol: AnyObject{
     ///Reference for Presenter of HomeView
+    ///  - Note: Always set presenter to weak to avoid retain cycle. Since Presenter already have reference of interactor, this pattern should be followed
     var presenter: HomeInteractorToPresenterProtocol? {get set}
 
     ///method is used to fetch alert string

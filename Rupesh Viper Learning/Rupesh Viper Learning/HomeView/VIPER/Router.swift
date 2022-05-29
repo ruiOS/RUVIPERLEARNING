@@ -7,7 +7,7 @@
 
 import Foundation
 
-class HomeRouter: HomePresenterToRouterProtocol{
+final class HomeRouter: HomePresenterToRouterProtocol{
 
     var entry: HomeEntryPoint?
 
