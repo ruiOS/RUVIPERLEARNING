@@ -5,7 +5,7 @@
 //  Created by Rupeshkumar on 29/05/22.
 //
 
-import Foundation
+import UIKit
 
 //MARK: - View
 
@@ -14,14 +14,15 @@ protocol HomeViewProtocol: AnyObject{
     ///Reference for Presenter of HomeView
     var presenter: HomePresenterProtocol? { get set }
 
-    ///method to showAlert in HomeView
+    /// method to showAlert in HomeView
+    /// - Parameter text: text to be shown in alert
     func showAlert(withText text: String)
 }
 
 //MARK: - Interactor
 
 ///Protocol for Interactor
-protocol HomeInteractorProtocol{
+protocol HomeInteractorProtocol: AnyObject{
     ///Reference for Presenter of HomeView
     var presenter: HomePresenterProtocol? {get set}
 
@@ -33,7 +34,7 @@ protocol HomeInteractorProtocol{
 //MARK: - Presenter
 
 ///Protocol for Presenter
-protocol HomePresenterProtocol{
+protocol HomePresenterProtocol: AnyObject{
     
     ///Reference for router of HomeView
     var router: HomeRouterProtocol? {get set}
@@ -55,9 +56,11 @@ protocol HomeViewDataProtocol{
 
 //MARK: - Router
 
-//Entry Point
+typealias HomeEntryPoint = HomeViewProtocol & UIViewController
 ///Protocol for router
-protocol HomeRouterProtocol{
+protocol HomeRouterProtocol: AnyObject{
+    ///EntryPoint for the app
+    var entry: HomeEntryPoint? { get set }
     ///method used to get router
     static func start() -> HomeRouterProtocol
 }

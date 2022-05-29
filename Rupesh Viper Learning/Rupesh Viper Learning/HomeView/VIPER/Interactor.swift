@@ -6,3 +6,13 @@
 //
 
 import Foundation
+
+///Interactor for HomeView
+final class HomeInteractor: HomeInteractorProtocol{
+
+    var presenter: HomePresenterProtocol?
+
+    func fetchAlertString() {
+    }
+
+}
