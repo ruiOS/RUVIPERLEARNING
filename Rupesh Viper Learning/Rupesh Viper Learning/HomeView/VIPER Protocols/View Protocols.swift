@@ -23,4 +23,7 @@ protocol HomePresenterToViewProtocol: AnyObject{
     ///method used to dismiss activity View
     func dismissActivity()
 
+    ///method used to set UI Elements in the ViewController
+    func setUIElements()
+
 }

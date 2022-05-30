@@ -26,4 +26,7 @@ final class HomePresenter: PresenterProtocol{
         interacor?.fetchAlertString()
     }
 
+    func viewDidLoad() {
+        view?.setUIElements()
+    }
 }
