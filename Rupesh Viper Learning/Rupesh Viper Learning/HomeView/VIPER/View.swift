@@ -30,9 +30,7 @@ final class HomeViewController: UIViewController, HomePresenterToViewProtocol {
     //MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        self.view.backgroundColor = .orange
-        setFetchButton()
+        presenter?.viewDidLoad()
     }
 
     //MARK: - Fetch Button
@@ -68,6 +66,14 @@ final class HomeViewController: UIViewController, HomePresenterToViewProtocol {
     }
 
     //MARK: - HomePresenterToViewProtocol
+
+    func setUIElements() {
+        DispatchQueue.main.async { [weak self] in
+            self?.view.backgroundColor = .orange
+            self?.setFetchButton()
+        }
+    }
+
     func showAlert(withText text: String?) {
         DispatchQueue.main.async { [weak self] in
             let alert = UIAlertController(title: nil, message: text, preferredStyle: .alert)

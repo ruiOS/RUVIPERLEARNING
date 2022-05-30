@@ -23,6 +23,9 @@ protocol HomeViewToPresenterProtocol: AnyObject{
     
     /// Called when fetch Button is tapped
     func fetchDataButtonPressed()
+
+    ///methods calls after controller is loaded into memory
+    func viewDidLoad()
 }
 
 
